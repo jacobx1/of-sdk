@@ -1,27 +1,29 @@
 import osa2 from 'osa2';
-import { OFTree } from '../model/OFTree';
+import { OFActionItem } from '../model/OFActionItem';
 import { OFDocumentWindow } from '../model/jxa/OFDocumentWindow';
 import { OFProject } from '../model/OFProject';
-import { OFStatus } from '../model/OFStatus';
-import { OFTask } from '../model/OFTask';
-import { OFActionItem } from '../model/OFActionItem';
 import { OFTag } from '../model/OFTag';
+import { OFTask } from '../model/OFTask';
+import { OFTree } from '../model/OFTree';
 
-declare var Application: any;
+declare const Application: any;
 
 enum CallType {
-  TASKS_FOR_PERSPECTIVE,
-  ALL_TASKS,
   ALL_PROJECTS,
   ALL_TAGS,
+  ALL_TASKS,
+  TASKS_FOR_PERSPECTIVE,
 
-  ADD_TASK,
-  ADD_TAG,
   ADD_PROJECT,
+  ADD_TAG,
   ADD_TAGS,
+  ADD_TASK,
 }
 
-function commonCall<TReturn = void>(callType: CallType, ...callerArgs: any[]) {
+function commonCall<TReturn = void>(
+  callType: CallType,
+  ...callerArgs: any[]
+): Promise<TReturn> {
   return osa2<TReturn>((type, callTypes, ...args) => {
     const omnifocus = Application('Omnifocus');
 
@@ -39,7 +41,7 @@ function commonCall<TReturn = void>(callType: CallType, ...callerArgs: any[]) {
 
     const getTaskById = (taskId: string) =>
       omnifocus.defaultDocument.flattenedTasks.whose({
-        id: args[0],
+        id: taskId,
       })[0];
 
     const getData = item => ({

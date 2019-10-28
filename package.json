@@ -1,0 +1,59 @@
+{
+  "name": "@jacobx1/of-sdk",
+  "version": "0.0.0",
+  "description": "Node interface for interacting with Omnifocus",
+  "main": "build/index.js",
+  "scripts": {
+    "prettier:write": "npx prettier --write \"src/**/*\"",
+    "version": "npx @pika/pack"
+  },
+  "files": [
+    "./build"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobx1/of-sdk.git"
+  },
+  "keywords": [
+    "omnifocus",
+    "node",
+    "typescript",
+    "jxa",
+    "automation"
+  ],
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg",
+        {
+          "exclude": [
+            "__tests__/**/*"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-node",
+        {
+          "minNodeVersion": "10"
+        }
+      ]
+    ]
+  },
+  "author": "Jacob Schwind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacobx1/of-sdk/issues"
+  },
+  "homepage": "https://github.com/jacobx1/of-sdk#readme",
+  "dependencies": {
+    "osa2": "^0.2.3"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.7.1",
+    "@pika/plugin-ts-standard-pkg": "^0.7.1",
+    "@types/node": "^12.11.7",
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.4"
+  }
+}

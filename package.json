@@ -53,12 +53,15 @@
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.7.1",
     "@pika/plugin-ts-standard-pkg": "^0.7.1",
+    "@types/jest": "^24.0.20",
     "@types/node": "^12.11.7",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   }
 }

@@ -7,7 +7,10 @@
     "prettier:write": "npx prettier --write \"src/**/*\"",
     "test": "npx jest",
     "lint": "npx eslint src/**/*.ts",
-    "release": "npx tsc && npx np"
+    "build": "npx tsc",
+    "clean": "rm -rf ./build/",
+    "build:clean": "npm run clean && npm run build",
+    "release": "npm run build:clean && npx np"
   },
   "files": [
     "build/**/*"

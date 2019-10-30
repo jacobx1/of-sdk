@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2017",
     "lib": ["es2017"],
     "rootDir": "src",
     "outDir": "build",
     "sourceMap": true,
     "noImplicitAny": false,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true

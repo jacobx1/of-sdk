@@ -10,7 +10,7 @@
     "release": "npx tsc && npx np"
   },
   "files": [
-    "./build"
+    "./build/**/*"
   ],
   "repository": {
     "type": "git",

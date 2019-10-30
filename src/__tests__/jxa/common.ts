@@ -15,7 +15,7 @@ describe('common', () => {
     it('gets all tasks', async () => {
       const allTasks = await getTasks();
       expect(allTasks).toBeTruthy();
-    }, 20000);
+    }, 60000);
 
     it('gets all projects', async () => {
       const allProjects = await getProjects();
@@ -25,6 +25,6 @@ describe('common', () => {
     it('gets all tags', async () => {
       const allTags = await getTags();
       expect(allTags).toBeTruthy();
-    });
+    }, 30000);
   });
 });

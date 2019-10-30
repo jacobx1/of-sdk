@@ -32,6 +32,9 @@
   "dependencies": {
     "osa2": "^0.2.3"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.20",
     "@types/node": "^12.11.7",

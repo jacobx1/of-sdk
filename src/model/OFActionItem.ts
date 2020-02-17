@@ -11,4 +11,5 @@ export interface OFActionItem extends OFItem {
   estimatedMinutes?: number;
   completed: boolean;
   dropped: boolean;
+  parent?: OFItem;
 }

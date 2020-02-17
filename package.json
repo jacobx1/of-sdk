@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "prettier:write": "npx prettier --write \"src/**/*\"",
-    "test": "npx jest",
+    "test": "npx jest -i --verbose",
     "lint": "npx eslint src/**/*.ts",
     "build": "npx tsc",
     "clean": "rm -rf ./build/",

@@ -108,18 +108,74 @@ function commonCall<TReturn = void>(
         return omnifocus.defaultDocument.flattenedProjects
           .whose(args[0])()
           .map(getExtendedProjectData);
-      case allCallTypes.ALL_TASKS:
+      case allCallTypes.ALL_TASKS: {
         const project = getProjectById(args[1]);
-        return (project
+        const taskIterator = (project
           ? project.rootTask
           : omnifocus.defaultDocument
-        ).flattenedTasks
-          .whose(args[0])()
-          .map(getExtendedTaskData);
-      case allCallTypes.ALL_TAGS:
-        return omnifocus.defaultDocument.flattenedTags
-          .whose(args[0])()
-          .map(getExtenedTagData);
+        ).flattenedTasks.whose(args[0]);
+
+        const ids = taskIterator.id.get();
+        const names = taskIterator.name.get();
+        const flagged = taskIterator.flagged.get();
+        const completionDate = taskIterator.completionDate.get();
+        const completed = taskIterator.completed.get();
+        const dropped = taskIterator.dropped.get();
+        const creationDate = taskIterator.creationDate.get();
+        const modificationDate = taskIterator.modificationDate.get();
+        const deferDate = taskIterator.deferDate.get();
+        const dueDate = taskIterator.dueDate.get();
+        const estimatedMinutes = taskIterator.estimatedMinutes.get();
+        const note = taskIterator.note.get();
+        const tagsIds = taskIterator.tags.id.get();
+        const tagsNames = taskIterator.tags.name.get();
+
+        return ids.map(
+          (item, index) =>
+            ({
+              id: item,
+              name: names[index],
+              flagged: flagged[index],
+              completionDate: completionDate[index],
+              completed: completed[index],
+              dropped: dropped[index],
+              creationDate: creationDate[index],
+              modificationDate: modificationDate[index],
+              deferDate: deferDate[index],
+              dueDate: dueDate[index],
+              estimatedMinutes: estimatedMinutes[index],
+              note: note[index],
+              tags: tagsIds[index].map((tagItem, tagIndex) => ({
+                id: tagItem,
+                name: tagsNames[index][tagIndex],
+              })),
+            } as OFTask)
+        );
+      }
+
+      case allCallTypes.ALL_TAGS: {
+        const tagIterator = omnifocus.defaultDocument.flattenedTags.whose(
+          args[0]
+        );
+        const allIds = tagIterator.id.get();
+        const allNames = tagIterator.name.get();
+        const availableTaskCount = tagIterator.availableTaskCount.get();
+        const effectivelyHidden = tagIterator.effectivelyHidden.get();
+        const hidden = tagIterator.hidden.get();
+        const remainingTaskCount = tagIterator.remainingTaskCount.get();
+
+        return allIds.map(
+          (item, index) =>
+            ({
+              id: item,
+              name: allNames[index],
+              availableTaskCount: availableTaskCount[index],
+              effectivelyHidden: effectivelyHidden[index],
+              hidden: hidden[index],
+              remainingTaskCount: remainingTaskCount[index],
+            } as OFTag)
+        );
+      }
       case allCallTypes.ADD_TASK: {
         const [taskDefinition, projectId] = args;
         const newTask = omnifocus.Task(taskDefinition);

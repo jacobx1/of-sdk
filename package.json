@@ -1,6 +1,6 @@
 {
   "name": "@jacobx1/of-sdk",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Node interface for interacting with Omnifocus",
   "main": "build/index.js",
   "scripts": {

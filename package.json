@@ -13,7 +13,8 @@
     "release": "npm run build:clean && npx np"
   },
   "files": [
-    "build/**/*"
+    "build/**/*",
+    "applescripts/**/*"
   ],
   "repository": {
     "type": "git",

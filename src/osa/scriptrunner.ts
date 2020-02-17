@@ -5,7 +5,7 @@ import path from 'path';
 const execAsync = promisify(exec);
 
 export const runScript = async <TReturn>(name: string, ...args: string[]) => {
-  const scriptPath = path.join(__dirname, '../../scripts', name);
+  const scriptPath = path.join(__dirname, '../../applescripts', name);
   const result = await execAsync(`osascript ${scriptPath} ${args.join(' ')}`);
   return JSON.parse(result.stdout) as TReturn;
 };

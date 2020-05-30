@@ -1,8 +1,8 @@
-import { OFJSTask, OFJSTag } from './ofjs';
+import { OFJSTask, OFJSTag, OFJSObject } from './ofjs';
 
 export default interface OmnifocusContext {
   Application: any;
-  flattenedProjects: any;
+  flattenedProjects: OFJSObject[];
   Perspective: any;
   Task: any;
   Project: any;

@@ -63,6 +63,17 @@ const stringifyMapper = item => {
   if (Array.isArray(item)) {
     return `[${item.map(stringifyMapper).join(', ')}]`;
   }
+
+  if (typeof item === 'object' && item != null) {
+    const valuesConcated = Object.entries(item)
+      .map(([key, val]) => ({
+        key,
+        val: stringifyMapper(val),
+      }))
+      .map(item => `${item.key}: ${item.val}`)
+      .join(', ');
+    return `{${valuesConcated}}`;
+  }
   return JSON.stringify(item);
 };
 
@@ -70,7 +81,10 @@ export const stringifyCall = (code, ...args) => {
   function scpt(code, ...scriptArgs) {
     return code.call(this, ...scriptArgs);
   }
-  const argList = [code, ...args].map(stringifyMapper).join(', ');
+  const argList = [code, ...args]
+    .map(stringifyMapper)
+    .map(val => `(${val})`)
+    .join(', ');
   return `${scpt}; scpt.call(this, ${argList});`;
 };
 
@@ -82,14 +96,14 @@ type Tail<T extends any[]> = ((...x: T) => void) extends (
   : never;
 
 export const omniFunc = <
-  D extends Array<any>,
+  D extends {},
   FN extends (this: OmnifocusContext, deps: D, ...args: any) => any
 >(
   code: FN,
   deps: D
 ) => {
   return (...args: Tail<Parameters<FN>>) => {
-    const rawCodeString = stringifyCall(code, deps || [], ...Array.from(args));
+    const rawCodeString = stringifyCall(code, deps, ...Array.from(args));
     return execOmniJsRaw<ReturnType<FN>>(rawCodeString);
   };
 };

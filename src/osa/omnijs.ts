@@ -14,27 +14,27 @@ function allItemsFilter() {
 }
 
 export const getTasks = omniFunc(
-  function(
-    [mapperMethod, defaultFilter],
-    filter?: (item: OFJSTask) => boolean
-  ) {
+  function(deps, filter?: (item: OFJSTask) => boolean) {
     return this.flattenedTasks
-      .filter(filter || defaultFilter)
-      .map(item => mapperMethod(item));
+      .filter(filter || deps.defaultFilter)
+      .map(item => deps.taskMapper(item));
   },
-  [taskMapper, allItemsFilter]
+  {
+    taskMapper,
+    defaultFilter: allItemsFilter,
+  }
 );
 
 export const getProjects = omniFunc(
-  function(
-    [mapperMethod, defaultFilter],
-    filter?: (item: OFJSTask) => boolean
-  ) {
+  function(deps, filter?: (item: OFJSTask) => boolean) {
     return this.flattenedProjects
-      .filter(filter || defaultFilter)
-      .map(mapperMethod);
+      .filter(filter || deps.defaultFilter)
+      .map(deps.taskMapper);
   },
-  [taskMapper, allItemsFilter]
+  {
+    taskMapper,
+    defaultFilter: allItemsFilter,
+  }
 );
 
 export const getTags = omniFunc(
@@ -47,7 +47,7 @@ export const getTags = omniFunc(
 );
 
 export const getTasksForPerspective = omniFunc(
-  function([mapperMethod], perspectiveName: string) {
+  function(deps, perspectiveName: string) {
     const perspective = this.Perspective.all.find(
       item => item.name === perspectiveName
     );
@@ -55,17 +55,15 @@ export const getTasksForPerspective = omniFunc(
     return this.document.windows[0].content
       .nodesForObjects(this.flattenedTasks)
       .map(item => item.object)
-      .map(mapperMethod) as Task[];
+      .map(deps.taskMapper) as Task[];
   },
-  [taskMapper]
+  {
+    taskMapper,
+  }
 );
 
 export const createTask = omniFunc(
-  function(
-    [mapperMethod],
-    title: string,
-    options: Partial<TaskCreateOptions> = {}
-  ) {
+  function(deps, title: string, options: Partial<TaskCreateOptions> = {}) {
     const project = options.projectId
       ? this.Project.byIdentifier(options.projectId)
       : undefined;
@@ -73,9 +71,11 @@ export const createTask = omniFunc(
     if (options.note) {
       task.note = options.note;
     }
-    return mapperMethod(task);
+    return deps.taskMapper(task);
   },
-  [taskMapper]
+  {
+    taskMapper,
+  }
 );
 
 export const deleteTaskById = omniFunc(function([], id: string) {

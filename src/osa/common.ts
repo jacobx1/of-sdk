@@ -1,4 +1,4 @@
-import osa2 from 'osa2';
+import { osa } from './osa';
 import { OFActionItem } from '../model/OFActionItem';
 import { OFDocumentWindow } from '../model/jxa/OFDocumentWindow';
 import { OFProject } from '../model/OFProject';
@@ -24,7 +24,7 @@ function commonCall<TReturn = void>(
   callType: CallType,
   ...callerArgs: any[]
 ): Promise<TReturn> {
-  return osa2<TReturn>((type, callTypes, ...args) => {
+  return osa<TReturn>((type, callTypes, ...args) => {
     const omnifocus = Application('Omnifocus');
 
     const getDefaultWindow = () =>

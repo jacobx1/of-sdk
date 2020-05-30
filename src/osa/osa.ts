@@ -1,6 +1,7 @@
 import { execFile as exec } from 'child_process';
+import OmnifocusContext from '../model/omnijs/OmnifocusContext';
 
-export function osa<T>(fn) {
+function osa<FN extends (...args: any) => any>(fn: FN) {
   const code = `
         ObjC.import('stdlib')
         var fn   = (${fn.toString()})
@@ -9,7 +10,7 @@ export function osa<T>(fn) {
         JSON.stringify(out)
     `;
 
-  const osafn = function(...args) {
+  const osafn = function<T>(...args: Parameters<FN>) {
     return new Promise<T>((resolve, reject) => {
       const child = exec(
         '/usr/bin/osascript',
@@ -46,3 +47,49 @@ export function osa<T>(fn) {
   };
   return osafn;
 }
+
+declare const Application: any;
+declare const flattenedTasks: any;
+
+export const execOmniJsRaw = osa((scpt: string) => {
+  const omnifocus = Application('Omnifocus');
+  return omnifocus.evaluateJavascript(scpt);
+});
+
+const stringifyMapper = item => {
+  if (typeof item === 'function') {
+    return item.toString();
+  }
+  if (Array.isArray(item)) {
+    return `[${item.map(stringifyMapper).join(', ')}]`;
+  }
+  return JSON.stringify(item);
+};
+
+export const stringifyCall = (code, ...args) => {
+  function scpt(code, ...scriptArgs) {
+    return code.call(this, ...scriptArgs);
+  }
+  const argList = [code, ...args].map(stringifyMapper).join(', ');
+  return `${scpt}; scpt.call(this, ${argList});`;
+};
+
+type Tail<T extends any[]> = ((...x: T) => void) extends (
+  h: infer A,
+  ...t: infer R
+) => void
+  ? R
+  : never;
+
+export const omniFunc = <
+  D extends Array<any>,
+  FN extends (this: OmnifocusContext, deps: D, ...args: any) => any
+>(
+  code: FN,
+  deps: D
+) => {
+  return (...args: Tail<Parameters<FN>>) => {
+    const rawCodeString = stringifyCall(code, deps || [], ...Array.from(args));
+    return execOmniJsRaw<ReturnType<FN>>(rawCodeString);
+  };
+};

@@ -1,4 +1,2 @@
-export * from './osa/common';
-import * as experimentalLib from './osa/experimental';
-
-export const experimental = experimentalLib;
+export * from './osa/omnijs';
+export { Task } from './model/Task';

@@ -9,8 +9,7 @@
     "lint": "npx eslint src/**/*.ts",
     "build": "npx tsc",
     "clean": "rm -rf ./build/",
-    "build:clean": "npm run clean && npm run build",
-    "release": "npm run build:clean && npx np"
+    "build:clean": "npm run clean && npm run build"
   },
   "files": [
     "build/**/*"

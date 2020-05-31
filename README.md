@@ -1,9 +1,9 @@
 ## of-sdk
 
-[![npm version](https://badge.fury.io/js/%40jacobx1%2Fof-sdk.svg)](https://badge.fury.io/js/%40jacobx1%2Fof-sdk)
+Tools to make it easier to automate Omnifocus via node.
 
-A node interface for interacting with Omnifocus. Utilizes JXA and OmniAutomation.
+- [Core SDK library][sdk]
+- [CLI example][cli]
 
-For an example of how to use, see [of-cli][of-cli-repo].
-
-[of-cli-repo]: https://github.com/jacobx1/of-cli
+[sdk]: ./packages/of-sdk/README.md
+[cli]: ./packages/of-cli/README.md

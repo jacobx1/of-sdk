@@ -1,6 +1,6 @@
 {
   "name": "@jacobx1/of-sdk",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Node interface for interacting with Omnifocus",
   "main": "build/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@jacobx1/of-types": "^0.2.2",
+    "@jacobx1/of-types": "^0.2.3",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.42",
     "@typescript-eslint/eslint-plugin": "^2.34.0",

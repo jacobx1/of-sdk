@@ -3,6 +3,9 @@ import ActiveObject from './ActiveObject';
 import Project from './Project';
 
 export default interface Task extends ActiveObject {
+  markComplete(date?: Date): void;
+  markIncomplete(): void;
+
   name: string;
   completed: boolean;
   completionDate: Date;

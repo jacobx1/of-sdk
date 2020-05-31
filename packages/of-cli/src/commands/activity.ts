@@ -51,4 +51,4 @@ const Activity: CommandModule = {
   },
 };
 
-export default Activity;
+module.exports = Activity;

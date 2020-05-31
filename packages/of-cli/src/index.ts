@@ -1,5 +1,4 @@
-import { command } from 'yargs';
-import AddTask from './commands/addtask';
-import Activity from './commands/activity';
+import { commandDir } from 'yargs';
+import path from 'path';
 
-command(AddTask).command(Activity).argv;
+commandDir('./commands').demandCommand().argv;

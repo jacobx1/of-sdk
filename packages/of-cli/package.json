@@ -3,7 +3,12 @@
   "version": "0.2.5",
   "description": "Command line interface for Omnifocus",
   "main": "index.js",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "of": "./bin/of.js"
+  },
   "scripts": {
     "build": "npx tsc"
   },

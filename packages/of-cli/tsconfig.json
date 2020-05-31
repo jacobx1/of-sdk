@@ -5,6 +5,8 @@
     "target": "es2017",
     "outDir": "build",
     "rootDir": "src",
-    "lib": ["es2017"]
+    "lib": ["es2017"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

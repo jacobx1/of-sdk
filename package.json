@@ -10,7 +10,7 @@
     "publish": "lerna publish",
     "publish:github": "lerna publish from-package --registry https://npm.pkg.github.com/ ",
     "release:preview": "lerna publish --dist-tag prerelease",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
   },
   "devDependencies": {
     "lerna": "^3.22.0",

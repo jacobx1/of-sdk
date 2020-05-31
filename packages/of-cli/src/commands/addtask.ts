@@ -10,7 +10,7 @@ const AddTask: CommandModule<TaskParams, TaskParams> = {
   describe: 'add a task',
   builder: (yargs) => {
     yargs.positional('task', {
-      describe: 'thing',
+      describe: 'title of task to add',
     });
     return yargs;
   },
@@ -19,4 +19,4 @@ const AddTask: CommandModule<TaskParams, TaskParams> = {
   },
 };
 
-export default AddTask;
+module.exports = AddTask;

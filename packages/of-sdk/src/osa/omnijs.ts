@@ -17,6 +17,7 @@ function allItemsFilter() {
 export const getTasks = omniFunc(
   function (deps, filter?: (item: OFJSTask) => boolean) {
     return this.flattenedTasks
+      .filter((item) => item.id.objectClass.name === 'Task')
       .filter(filter || deps.defaultFilter)
       .map((item) => deps.taskMapper(item));
   },
@@ -58,6 +59,7 @@ export const getTasksForPerspective = omniFunc(
     this.document.windows[0].perspective = perspective;
     return this.document.windows[0].content
       .nodesForObjects(this.flattenedTasks)
+      .filter((item) => item.object.id.objectClass.name === 'Task')
       .map((item) => item.object)
       .map(deps.taskMapper) as Task[];
   },
@@ -85,4 +87,9 @@ export const createTask = omniFunc(
 export const deleteTaskById = omniFunc(function (deps, id: string) {
   const task = this.Task.byIdentifier(id);
   this.deleteObject(task);
+}, {});
+
+export const completeTaskById = omniFunc(function (deps, id: string) {
+  const task = this.Task.byIdentifier(id);
+  task.markComplete();
 }, {});

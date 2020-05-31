@@ -1,6 +1,6 @@
 {
   "name": "@jacobx1/of-types",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "TypeScript definitions for Omnifocus JS automation",
   "main": "build/index.js",
   "scripts": {

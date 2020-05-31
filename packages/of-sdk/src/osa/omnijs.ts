@@ -81,7 +81,7 @@ export const createTask = omniFunc(
   }
 );
 
-export const deleteTaskById = omniFunc(function ([], id: string) {
-  const task = this.Task.fromIdentifier(id);
+export const deleteTaskById = omniFunc(function (deps, id: string) {
+  const task = this.Task.byIdentifier(id);
   this.deleteObject(task);
-}, []);
+}, {});

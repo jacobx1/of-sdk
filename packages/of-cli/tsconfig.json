@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2017",
+    "outDir": "build",
+    "rootDir": "src",
+    "lib": ["es2017"]
+  }
+}

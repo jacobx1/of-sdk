@@ -10,7 +10,7 @@ import {
 describe('omnijs', () => {
   describe('read tests', () => {
     it('gets all open tasks', async () => {
-      const allTasks = await getTasks(item => !item.completed);
+      const allTasks = await getTasks((item) => !item.completed);
       expect(allTasks).toBeTruthy();
     }, 60000);
 
@@ -39,7 +39,7 @@ describe('omnijs', () => {
     });
 
     it('creates task in project', async () => {
-      const projects = await getProjects(item => item.name === 'GitHub');
+      const projects = await getProjects((item) => item.name === 'GitHub');
       const project = projects[0];
       const task = await createTask('Hello github', {
         projectId: project.id,

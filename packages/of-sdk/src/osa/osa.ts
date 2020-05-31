@@ -10,7 +10,7 @@ function osa<FN extends (...args: any) => any>(fn: FN) {
         JSON.stringify(out)
     `;
 
-  const osafn = function<T>(...args: Parameters<FN>) {
+  const osafn = function <T>(...args: Parameters<FN>) {
     return new Promise<T>((resolve, reject) => {
       const child = exec(
         '/usr/bin/osascript',
@@ -56,7 +56,7 @@ export const execOmniJsRaw = osa((scpt: string) => {
   return omnifocus.evaluateJavascript(scpt);
 });
 
-const stringifyMapper = item => {
+const stringifyMapper = (item) => {
   if (typeof item === 'function') {
     return item.toString();
   }
@@ -70,7 +70,7 @@ const stringifyMapper = item => {
         key,
         val: stringifyMapper(val),
       }))
-      .map(item => `${item.key}: ${item.val}`)
+      .map((item) => `${item.key}: ${item.val}`)
       .join(', ');
     return `{${valuesConcated}}`;
   }
@@ -83,7 +83,7 @@ export const stringifyCall = (code, ...args) => {
   }
   const argList = [code, ...args]
     .map(stringifyMapper)
-    .map(val => `(${val})`)
+    .map((val) => `(${val})`)
     .join(', ');
   return `${scpt}; scpt.call(this, ${argList});`;
 };

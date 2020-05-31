@@ -1,53 +1,14 @@
 {
-  "name": "@jacobx1/of-sdk",
-  "version": "1.0.0-2",
-  "description": "Node interface for interacting with Omnifocus",
-  "main": "build/index.js",
+  "name": "of-tools",
+  "private": true,
   "scripts": {
-    "prettier:write": "npx prettier --write \"src/**/*\"",
-    "test": "npx jest -i --verbose",
-    "lint": "npx eslint src/**/*.ts",
-    "build": "npx tsc",
-    "clean": "rm -rf ./build/",
-    "build:clean": "npm run clean && npm run build",
-    "release": "npm run build:clean && npx np"
-  },
-  "files": [
-    "build/**/*",
-    "applescripts/**/*"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jacobx1/of-sdk.git"
-  },
-  "keywords": [
-    "omnifocus",
-    "node",
-    "typescript",
-    "jxa",
-    "automation"
-  ],
-  "author": "Jacob Schwind",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jacobx1/of-sdk/issues"
-  },
-  "homepage": "https://github.com/jacobx1/of-sdk#readme",
-  "dependencies": {},
-  "publishConfig": {
-    "access": "public"
+    "bootstrap": "lerna bootstrap --hoist",
+    "prettier:write": "prettier --write \"packages/*/src/**/*\"",
+    "build": "lerna run build",
+    "prepublishOnly": "build"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.42",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "jest": "^26.0.0",
-    "np": "^6.2.3",
-    "prettier": "^1.19.1",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.3"
+    "lerna": "^3.22.0",
+    "prettier": "^2.0.5"
   }
 }

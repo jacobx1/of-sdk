@@ -14,10 +14,10 @@ function allItemsFilter() {
 }
 
 export const getTasks = omniFunc(
-  function(deps, filter?: (item: OFJSTask) => boolean) {
+  function (deps, filter?: (item: OFJSTask) => boolean) {
     return this.flattenedTasks
       .filter(filter || deps.defaultFilter)
-      .map(item => deps.taskMapper(item));
+      .map((item) => deps.taskMapper(item));
   },
   {
     taskMapper,
@@ -26,7 +26,7 @@ export const getTasks = omniFunc(
 );
 
 export const getProjects = omniFunc(
-  function(deps, filter?: (item: OFJSTask) => boolean) {
+  function (deps, filter?: (item: OFJSTask) => boolean) {
     return this.flattenedProjects
       .filter(filter || deps.defaultFilter)
       .map(deps.taskMapper);
@@ -38,23 +38,26 @@ export const getProjects = omniFunc(
 );
 
 export const getTags = omniFunc(
-  function([mapperMethod, defaultFilter], filter?: (item: OFJSTag) => boolean) {
+  function (
+    [mapperMethod, defaultFilter],
+    filter?: (item: OFJSTag) => boolean
+  ) {
     return this.flattenedTags
       .filter(filter || defaultFilter)
-      .map(item => mapperMethod(item));
+      .map((item) => mapperMethod(item));
   },
   [tagMapper, allItemsFilter]
 );
 
 export const getTasksForPerspective = omniFunc(
-  function(deps, perspectiveName: string) {
+  function (deps, perspectiveName: string) {
     const perspective = this.Perspective.all.find(
-      item => item.name === perspectiveName
+      (item) => item.name === perspectiveName
     );
     this.document.windows[0].perspective = perspective;
     return this.document.windows[0].content
       .nodesForObjects(this.flattenedTasks)
-      .map(item => item.object)
+      .map((item) => item.object)
       .map(deps.taskMapper) as Task[];
   },
   {
@@ -63,7 +66,7 @@ export const getTasksForPerspective = omniFunc(
 );
 
 export const createTask = omniFunc(
-  function(deps, title: string, options: Partial<TaskCreateOptions> = {}) {
+  function (deps, title: string, options: Partial<TaskCreateOptions> = {}) {
     const project = options.projectId
       ? this.Project.byIdentifier(options.projectId)
       : undefined;
@@ -78,7 +81,7 @@ export const createTask = omniFunc(
   }
 );
 
-export const deleteTaskById = omniFunc(function([], id: string) {
+export const deleteTaskById = omniFunc(function ([], id: string) {
   const task = this.Task.fromIdentifier(id);
   this.deleteObject(task);
 }, []);

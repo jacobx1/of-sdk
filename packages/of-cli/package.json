@@ -1,0 +1,33 @@
+{
+  "name": "@jacobx1/of-cli",
+  "version": "0.0.0",
+  "description": "Command line interface for Omnifocus",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobx1/of-cli.git"
+  },
+  "keywords": [
+    "omnifocus",
+    "cli"
+  ],
+  "author": "Jacob Schwind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacobx1/of-cli/issues"
+  },
+  "homepage": "https://github.com/jacobx1/of-cli#readme",
+  "dependencies": {
+    "@jacobx1/of-sdk": "^1.0.0-2",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.42",
+    "@types/yargs": "^15.0.5",
+    "typescript": "^3.9.3"
+  }
+}

@@ -28,7 +28,7 @@ export default function taskMapper({
     note,
     id: id.primaryKey,
     completionDate: completionDate && completionDate.toISOString(),
-    tags: tags.map(tag => ({
+    tags: tags.map((tag) => ({
       name: tag.name,
       id: tag.id.primaryKey,
     })),

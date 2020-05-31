@@ -1,27 +1,22 @@
-import { Task as OFJSTask } from '@jacobx1/of-types';
-import { Task } from '../model/Task';
+import { Project as OFJSProject } from '@jacobx1/of-types';
+import { Project } from '../model/Project';
 
-export default function taskMapper({
+export default function projectMapper({
   name,
   completed,
   id,
   completionDate,
   dropDate,
-  added,
-  modified,
   deferDate,
   dueDate,
   estimatedMinutes,
   note,
   tags,
-  project,
-}: OFJSTask): Task {
+}: OFJSProject): Project {
   return {
     name,
     completed,
     dropDate: dropDate && dropDate.toISOString(),
-    added: added && added.toISOString(),
-    modified: modified && modified.toISOString(),
     deferDate: deferDate && deferDate.toISOString(),
     dueDate: dueDate && dueDate.toISOString(),
     estimatedMinutes,
@@ -32,9 +27,5 @@ export default function taskMapper({
       name: tag.name,
       id: tag.id.primaryKey,
     })),
-    project: project && {
-      name: project.name,
-      id: project.id.primaryKey,
-    },
   };
 }

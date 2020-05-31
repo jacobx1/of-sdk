@@ -1,5 +1,5 @@
 import { execFile as exec } from 'child_process';
-import OmnifocusContext from '../model/omnijs/OmnifocusContext';
+import { OmnifocusScriptingContext } from '@jacobx1/of-types';
 
 function osa<FN extends (...args: any) => any>(fn: FN) {
   const code = `
@@ -49,7 +49,6 @@ function osa<FN extends (...args: any) => any>(fn: FN) {
 }
 
 declare const Application: any;
-declare const flattenedTasks: any;
 
 export const execOmniJsRaw = osa((scpt: string) => {
   const omnifocus = Application('Omnifocus');
@@ -97,7 +96,7 @@ type Tail<T extends any[]> = ((...x: T) => void) extends (
 
 export const omniFunc = <
   D extends {},
-  FN extends (this: OmnifocusContext, deps: D, ...args: any) => any
+  FN extends (this: OmnifocusScriptingContext, deps: D, ...args: any) => any
 >(
   code: FN,
   deps: D

@@ -1,8 +1,9 @@
 import { omniFunc } from './osa';
-import { OFJSTask, OFJSTag } from '../model/omnijs/ofjs';
+import { Task as OFJSTask, Tag as OFJSTag, Project } from '@jacobx1/of-types';
 import { Task } from '../model/Task';
 import taskMapper from '../transform/taskMapper';
 import tagMapper from '../transform/tagMapper';
+import projectMapper from '../transform/projectMapper';
 
 interface TaskCreateOptions {
   projectId: string;
@@ -26,13 +27,13 @@ export const getTasks = omniFunc(
 );
 
 export const getProjects = omniFunc(
-  function (deps, filter?: (item: OFJSTask) => boolean) {
+  function (deps, filter?: (item: Project) => boolean) {
     return this.flattenedProjects
       .filter(filter || deps.defaultFilter)
-      .map(deps.taskMapper);
+      .map(deps.projectMapper);
   },
   {
-    taskMapper,
+    projectMapper: projectMapper,
     defaultFilter: allItemsFilter,
   }
 );

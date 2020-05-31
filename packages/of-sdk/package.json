@@ -35,6 +35,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@jacobx1/of-types": "^0.2.2",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.42",
     "@typescript-eslint/eslint-plugin": "^2.34.0",

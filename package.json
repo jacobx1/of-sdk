@@ -5,7 +5,7 @@
     "bootstrap": "lerna bootstrap --hoist",
     "prettier:write": "prettier --write \"packages/*/src/**/*\"",
     "build": "lerna run build",
-    "prepublishOnly": "build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "lerna": "^3.22.0",

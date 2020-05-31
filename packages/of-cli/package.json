@@ -1,6 +1,6 @@
 {
   "name": "@jacobx1/of-cli",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "description": "Command line interface for Omnifocus",
   "main": "index.js",
   "private": true,
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/jacobx1/of-cli#readme",
   "dependencies": {
-    "@jacobx1/of-sdk": "^1.0.0-3",
+    "@jacobx1/of-sdk": "^0.2.1",
     "yargs": "^15.3.1"
   },
   "devDependencies": {
